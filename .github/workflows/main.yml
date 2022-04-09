@@ -37,7 +37,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           if [ -f starter/requirements.txt ]; then pip install -r starter/requirements.txt; fi
-     
+          
+      - name: Setup AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      
+      - uses: iterative/setup-dvc@v1
+      
+      # pull data from s3
+      - name: DVC pull dataset
+        run: dvc pull --remote aws_s3
+      
       # Lint checking with flake8
       - name: Lint with flake8
         run: |
@@ -50,17 +63,5 @@ jobs:
         run: |
           pytest
           
-      - name: Setup AWS
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      
-      - uses: iterative/setup-dvc@v1
-      
-      # pull data from s3
-      - name: dvc pull dataset
-        run: dvc pull --remote aws_s3
 
       
