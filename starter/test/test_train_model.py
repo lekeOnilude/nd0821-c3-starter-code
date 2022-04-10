@@ -14,7 +14,7 @@ def data():
     """
     Load the dataset so it can be used for testing
     """
-    data_path = "starter/data/census.csv"
+    data_path = "starter/data/census_clean.csv"
     df = pd.read_csv(data_path)
     return df
 
