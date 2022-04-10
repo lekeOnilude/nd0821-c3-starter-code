@@ -2,6 +2,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelBinarizer
 import joblib
+import json
 
 # Add the necessary imports for the starter code.
 import pandas as pd
@@ -42,11 +43,20 @@ Trained_model = train_model(X_train, y_train)
 filename = 'model/log_reg_model.sav'
 pickle.dump(Trained_model, open(filename, 'wb'))
 
+filename_encoder = 'model/encoder.sav'
+pickle.dump(encoder, open(filename_encoder, 'wb'))
 
 # Test with slice data
 result = {}
 slice_cat_features = [
     "workclass",
+    "education",
+    "marital-status",
+    "occupation",
+    "relationship",
+    "race",
+    "sex",
+    "native-country",
 ]
 for cat_feature in slice_cat_features:
     result.update(
@@ -54,7 +64,9 @@ for cat_feature in slice_cat_features:
         Trained_model, X_test, y_test)
         )
 
-#print(result)
+with open("slice_output.txt", "w") as f:
+    f.write(json.dumps(result))
+
 
 # Build pipe line
 sk_pipe = get_inference_pipeline()
