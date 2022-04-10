@@ -74,26 +74,5 @@ y_pred = lb.transform(y_pred)
 print(compute_model_metrics(y_test, y_pred))
 
 
-# ###########################
-# request_output = {
-#     "age": 27,
-#     "workclass": "Private",
-#     "fnlgt": 160178,
-#     "education": "Some-college",
-#     "education-num": 10,
-#     "marital-status": "Divorced",
-#     "occupation": "Adm-clerical",
-#     "relationship": "Not-in-family",
-#     "race": "White",
-#     "sex": "Female",
-#     "capital-gain": 0,
-#     "capital-loss": 0,
-#     "hours-per-week": 38,
-#     "native-country": "United-States"}
-
-# x_t = pd.DataFrame(request_output, index=[0])
-# print(x_t.shape)
-# print(sk_pipe.predict(x_t))
-
-
+############################
 joblib.dump(sk_pipe, 'starter/model/lr_model.pkl')
