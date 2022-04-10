@@ -26,6 +26,23 @@ class Value(BaseModel):
 
     class Config:
         allow_population_by_field_name = True
+        schema_extra = {
+            "example" : {
+                "age": 27,
+                "workclass": "Private",
+                "fnlgt": 160178,
+                "education": "Some-college",
+                "education-num": 10,
+                "marital-status": "Divorced",
+                "occupation": "Adm-clerical",
+                "relationship": "Not-in-family",
+                "race": "White",
+                "sex": "Female",
+                "capital-gain": 0,
+                "capital-loss": 0,
+                "hours-per-week": 38,
+                "native-country": "United-States"}
+        }
 
 
 @app.get("/")
