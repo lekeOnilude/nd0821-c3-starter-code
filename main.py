@@ -58,7 +58,7 @@ async def greetings():
 
 @app.post("/get-salary")
 async def exercise_function(body: Value):
-    sk_pipe = joblib.load('starter/model/lr_model.pkl')
+    sk_pipe = joblib.load('model/lr_model.pkl')
     query = body.dict(by_alias=True)
     x = pd.DataFrame(query, index=[0])
     y_pred = sk_pipe.predict(x)

@@ -10,7 +10,7 @@ from ml.model import train_model, slice_dataset_inference, get_inference_pipelin
 import pickle
 
 # Add code to load in the data.
-data_path = "starter/data/census_clean.csv"
+data_path = "data/census_clean.csv"
 data = pd.read_csv(data_path)
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
@@ -39,7 +39,7 @@ X_test, y_test, encoder_test, lb_test = process_data(
 # Train and save a model.
 Trained_model = train_model(X_train, y_train)
 
-filename = 'starter/model/log_reg_model.sav'
+filename = 'model/log_reg_model.sav'
 pickle.dump(Trained_model, open(filename, 'wb'))
 
 
@@ -75,4 +75,4 @@ print(compute_model_metrics(y_test, y_pred))
 
 
 ############################
-joblib.dump(sk_pipe, 'starter/model/lr_model.pkl')
+joblib.dump(sk_pipe, 'model/lr_model.pkl')
