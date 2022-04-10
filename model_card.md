@@ -3,10 +3,11 @@
 For additional information see the Model Card paper: https://arxiv.org/pdf/1810.03993.pdf
 
 ## Model Details
-The model is a Simple linear Regression Algrothrim with no hyper-parameter turning
+The model is a Simple linear Regression Algrothrim with no hyper-parameter turning.
 
 ## Intended Use
-This model is purely to just for baseline model
+This model is purely to just for baseline. It is meant to predict the salary bracket of an individual
+giving the required datapoint
 
 ## Training Data
 The dataset was gooten from the following source (Link)[]
@@ -36,8 +37,9 @@ salary: >50K, <=50K.
 
 ## Metrics
 _Please include the metrics used and your model's performance on those metrics._
+The model was tested using the following metric and its performace is also stated below 
 
-precision, recall, fbeta
+precision, recall, fbeta = (0.7285223367697594, 0.2698917886696372, 0.393869019972132)
 
 ## Ethical Considerations
 Using data slicing I check the he performance on slices of just the categorical features.
