@@ -10,6 +10,7 @@ client = TestClient(app)
 def test_api_locally_get_root():
     r = client.get("/")
     assert r.status_code == 200
+    assert r.json() == ["Welcome"]
 
 def test_api_locally_post_root():
     request_boby = {
@@ -29,6 +30,7 @@ def test_api_locally_post_root():
         "native-country": "United-States"}
 
     r = client.post("/get-salary", json=request_boby)
+    assert r.status_code == 200
     assert r.json() == {"result": "<=50K"}
 
 def test_api_locally_post_50K():
@@ -49,4 +51,5 @@ def test_api_locally_post_50K():
         "native-country": "United-States"}
 
     r = client.post("/get-salary", json=request_boby)
+    assert r.status_code == 200
     assert r.json() == {"result": ">50K"}
