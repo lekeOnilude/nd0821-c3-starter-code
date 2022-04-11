@@ -4,6 +4,7 @@ import pytest
 from starter.ml.data import process_data
 from starter.ml.model import compute_model_metrics, inference
 import pandas as pd
+import joblib
 
 from sklearn.model_selection import train_test_split
 
@@ -73,8 +74,7 @@ def test_inference(data):
     test, categorical_features=cat_features, label="salary", training=False,
     encoder=encoder, lb=lb)
 
-    with open("model/log_reg_model.sav", 'rb') as file:
-        model = pickle.load(file)
+    model = joblib.load('model/log_reg_model.sav')
 
     pred = inference(model, X_test)
 
@@ -104,8 +104,7 @@ def test_compute_model_metrics(data):
     test, categorical_features=cat_features, label="salary", training=False,
     encoder=encoder, lb=lb)
 
-    with open("model/log_reg_model.sav", 'rb') as file:
-        model = pickle.load(file)
+    model = joblib.load('model/log_reg_model.sav')
     
     pred = inference(model, X_test)
     metrics = compute_model_metrics(y_test, pred)

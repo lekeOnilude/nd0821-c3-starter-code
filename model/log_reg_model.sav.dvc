@@ -1,4 +1,4 @@
 outs:
-- md5: 2101052f3f4280e4c050402e773ba153
-  size: 1575
+- md5: 17cd6e52bf1acdbd9bcbfd104453c9b3
+  size: 1645
   path: log_reg_model.sav

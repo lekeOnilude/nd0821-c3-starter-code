@@ -44,13 +44,18 @@ Trained_model = train_model(X_train, y_train)
 
 y_pred_m1 = Trained_model.predict(X_test)
 
-print("model 1", compute_model_metrics(y_test, y_pred_m1))
+
+print("model", compute_model_metrics(y_test, y_pred_m1))
 
 filename = 'model/log_reg_model.sav'
-pickle.dump(Trained_model, open(filename, 'wb'))
+joblib.dump(Trained_model, filename)
+
 
 filename_encoder = 'model/encoder.sav'
-pickle.dump(encoder, open(filename_encoder, 'wb'))
+joblib.dump(encoder, filename_encoder)
+
+filename_lb = 'model/lb.sav'
+joblib.dump(lb, filename_lb)
 
 # Test with slice data
 result = {}
@@ -73,24 +78,46 @@ for cat_feature in slice_cat_features:
 with open("slice_output.txt", "w") as f:
     f.write(json.dumps(result))
 
-# Model Two
-# Build pipe line
-sk_pipe = get_inference_pipeline()
 
-y_train = train['salary']
-x_train = train.drop(["salary"], axis=1)
+# # Build pipe line
+# sk_pipe = get_inference_pipeline()
 
-sk_pipe.fit(x_train, y_train)
+# y_train = train['salary']
+# x_train = train.drop(["salary"], axis=1)
 
-y_test = test['salary']
-x_test = test.drop(["salary"], axis=1)
-y_pred_m2 = sk_pipe.predict(x_test)
+# sk_pipe.fit(x_train, y_train)
 
-lb = LabelBinarizer()
-y_test = lb.fit_transform(y_test)
-y_pred_m2 = lb.transform(y_pred_m2)
-print("Model 2 (P)", compute_model_metrics(y_test, y_pred_m2))
+# y_test = test['salary']
+# x_test = test.drop(["salary"], axis=1)
+# y_pred_m2 = sk_pipe.predict(x_test)
+
+# lb = LabelBinarizer()
+# y_test = lb.fit_transform(y_test)
+# y_pred_m2 = lb.transform(y_pred_m2)
+# print("Model (P)", compute_model_metrics(y_test, y_pred_m2))
+
+# # Test with slice data
+# result = {}
+# slice_cat_features = [
+#     "workclass",
+#     "education",
+#     "marital-status",
+#     "occupation",
+#     "relationship",
+#     "race",
+#     "sex",
+#     "native-country",
+# ]
 
 
-############################
-joblib.dump(sk_pipe, 'model/lr_model.pkl')
+# for cat_feature in slice_cat_features:
+#     result.update(
+#         slice_dataset_inference(cat_feature, test,
+#         sk_pipe, x_test, y_test)
+#         )
+
+# with open("slice_output.txt", "w") as f:
+#     f.write(json.dumps(result))
+
+# ############################
+# joblib.dump(sk_pipe, 'model/lr_model.pkl')
