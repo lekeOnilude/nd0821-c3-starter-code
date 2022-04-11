@@ -40,6 +40,12 @@ X_test, y_test, encoder_test, lb_test = process_data(
 # Train and save a model.
 Trained_model = train_model(X_train, y_train)
 
+# Model One
+
+y_pred_m1 = Trained_model.predict(X_test)
+
+print("model 1", compute_model_metrics(y_test, y_pred_m1))
+
 filename = 'model/log_reg_model.sav'
 pickle.dump(Trained_model, open(filename, 'wb'))
 
@@ -67,7 +73,7 @@ for cat_feature in slice_cat_features:
 with open("slice_output.txt", "w") as f:
     f.write(json.dumps(result))
 
-
+# Model Two
 # Build pipe line
 sk_pipe = get_inference_pipeline()
 
@@ -78,12 +84,12 @@ sk_pipe.fit(x_train, y_train)
 
 y_test = test['salary']
 x_test = test.drop(["salary"], axis=1)
-y_pred = sk_pipe.predict(x_test)
+y_pred_m2 = sk_pipe.predict(x_test)
 
 lb = LabelBinarizer()
 y_test = lb.fit_transform(y_test)
-y_pred = lb.transform(y_pred)
-print(compute_model_metrics(y_test, y_pred))
+y_pred_m2 = lb.transform(y_pred_m2)
+print("Model 2 (P)", compute_model_metrics(y_test, y_pred_m2))
 
 
 ############################
