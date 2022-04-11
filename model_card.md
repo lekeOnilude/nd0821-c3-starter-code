@@ -36,13 +36,20 @@ salary: >50K, <=50K.
 
 
 ## Metrics
-_Please include the metrics used and your model's performance on those metrics._
 The model was tested using the following metric and its performace is also stated below 
 
 precision, recall, fbeta = (0.7285223367697594, 0.2698917886696372, 0.393869019972132)
 
 ## Ethical Considerations
-Using data slicing I check the he performance on slices of just the categorical features.
+Using data slicing I check the performance on slices of just the categorical features.
+
+- Sex: The model perform better for male compare to Female
+- Race: The model has a stable score overall
+- marital-status: The class "Never-married" has the worst performace compared to the rest
 
 ## Caveats and Recommendations
-None
+
+- Log experiments
+- Perform some Feature engineering
+- Try another Machine learning model
+- Implement cross validation during traning process
